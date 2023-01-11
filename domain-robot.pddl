@@ -34,7 +34,7 @@
 
     (infood ?f - food ?b - box)
     (inmedicine ?m - medicine ?b - box)
-    (intool ?f - food ?b - box)
+    (intool ?t - tool ?b - box)
 
     (empty ?b - box)
 
