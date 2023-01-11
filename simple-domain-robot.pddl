@@ -10,6 +10,7 @@
     robot
     location
     item
+    food medicine tool - item
     box
 )
 
@@ -48,13 +49,37 @@
 
 ;define actions here
 
-(:action move
-    :parameters (?r - robot ?from ?to - location)
-    :precondition (and (at-robot ?r ?from)
-                       (not (= ?from ?to))
+(:action fill-item
+    :parameters (?b - box ?r - robot ?l - location ?i - item)
+    :precondition (and ;(= ?l depot)
+                       (at-box ?b ?l)
+                       (at-robot ?r ?l)
+                       (at-item ?i ?l)
+                       (empty ?b)
+                       (not (full ?b ?i))
+                       (not (inbox ?i))
     )
-    :effect (and (at-robot ?r ?to)
-                 (not (at-robot ?r ?from))
+    :effect (and (full ?b ?i)
+                 (not (empty ?b))
+                 (inbox ?i)
+    
+    )
+)
+
+(:action load-robot
+    :parameters (?r - robot ?b - box ?l - location ?i - item)
+    :precondition (and (full ?b ?i)
+                       (not (empty ?b))
+                       (inbox ?i)
+                       (not (loaded ?r ?b))
+                       (free ?r)
+                       (at-robot ?r ?l)
+                       (at-box ?b ?l)
+
+    )
+    :effect (and (loaded ?r ?b)
+                 (not (free ?r))
+                       
     )
 )
 
@@ -69,31 +94,17 @@
                        (not (at-item ?i ?to))
                        ;(not (= ?from ?to))
                        (full ?b ?i)
+                       (inbox ?i)
                        (not (empty ?b))
                        (loaded ?r ?b)
+                       (not (free ?r))
     )
     :effect (and (at-robot ?r ?to)
                  (at-box ?b ?to)
                  (at-item ?i ?to)
                  (not (at-robot ?r ?from))
                  (not (at-box ?b ?from))
-    )
-)
-
-
-(:action load-robot
-    :parameters (?r - robot ?b - box ?l - location ?i - item)
-    :precondition (and (full ?b ?i)
-                       (not (empty ?b))
-                       (not (loaded ?r ?b))
-                       (free ?r)
-                       (at-robot ?r ?l)
-                       (at-box ?b ?l)
-
-    )
-    :effect (and (loaded ?r ?b)
-                 (not (free ?r))
-                       
+                 (not (at-item ?i ?from))
     )
 )
 
@@ -118,6 +129,7 @@
     :precondition (and (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-person ?p ?l)
+                       (at-item ?i ?l)
                        (full ?b ?i)
                        (not (loaded ?r ?b))
                        (free ?r)
@@ -132,21 +144,15 @@
     )
 )
 
-(:action fill-item
-    :parameters (?b - box ?r - robot ?l - location ?i - item)
-    :precondition (and ;(= ?l depot)
-                       (at-box ?b ?l)
-                       (at-robot ?r ?l)
-                       (at-item ?i ?l)
-                       (empty ?b)
-                       (not (full ?b ?i))
-                       (not (inbox ?i))
+(:action move
+    :parameters (?r - robot ?from ?to - location)
+    :precondition (and (at-robot ?r ?from)
+                       (not (= ?from ?to))
     )
-    :effect (and (full ?b ?i)
-                 (not (empty ?b))
-                 (inbox ?i)
-    
+    :effect (and (at-robot ?r ?to)
+                 (not (at-robot ?r ?from))
     )
 )
+
 
 )
