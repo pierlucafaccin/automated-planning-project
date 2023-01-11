@@ -34,8 +34,11 @@
     (loaded ?r - robot ?b - box)
     (free ?r - robot)
 
-    (need ?p - person ?i - item)
-    (delivered ?i - item ?p - person)
+    (need-food ?p - person)
+    (need-medicine ?p - person)
+    (need-tool ?p - person)
+
+    ;(delivered ?i - item ?p - person)
 
     ; otherwise two boxes can be filled with the same item at the same time
     (inbox ?i - item)
@@ -124,23 +127,60 @@
     )
 )
 
-(:action empty-box
-    :parameters (?r - robot ?b - box ?l - location ?i - item ?p - person)
+(:action empty-box-food
+    :parameters (?r - robot ?b - box ?l - location ?f - food ?p - person)
     :precondition (and (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-person ?p ?l)
-                       (at-item ?i ?l)
-                       (full ?b ?i)
+                       (at-item ?f ?l)
+                       (full ?b ?f)
                        (not (loaded ?r ?b))
                        (free ?r)
-                       (need ?p ?i)
-                       (inbox ?i)
+                       (need-food ?p)
+                       (inbox ?f)
 
     )
-    :effect (and (delivered ?i ?p)
-                 (not (need ?p ?i))
-                 (not (inbox ?i))
-                 (not (full ?b ?i))
+    :effect (and (not (need-food ?p))
+                 (not (inbox ?f))
+                 (not (full ?b ?f))
+    )
+)
+
+(:action empty-box-medicine
+    :parameters (?r - robot ?b - box ?l - location ?m - medicine ?p - person)
+    :precondition (and (at-robot ?r ?l)
+                       (at-box ?b ?l)
+                       (at-person ?p ?l)
+                       (at-item ?m ?l)
+                       (full ?b ?m)
+                       (not (loaded ?r ?b))
+                       (free ?r)
+                       (need-medicine ?p)
+                       (inbox ?m)
+
+    )
+    :effect (and (not (need-medicine ?p))
+                 (not (inbox ?m))
+                 (not (full ?b ?m))
+    )
+)
+
+(:action empty-box-tool
+    :parameters (?r - robot ?b - box ?l - location ?t - tool ?p - person)
+    :precondition (and (at-robot ?r ?l)
+                       (at-box ?b ?l)
+                       (at-person ?p ?l)
+                       (at-item ?t ?l)
+                       (full ?b ?t)
+                       (not (loaded ?r ?b))
+                       (free ?r)
+                       (need-tool ?p)
+                       (inbox ?t)
+
+    )
+    :effect (and (not (need-tool ?p))
+                 (not (inbox ?t))
+                 (not (full ?b ?t))
     )
 )
 
