@@ -1,6 +1,6 @@
 ;Header and description
 
-(define (domain robot)
+(define (domain robot-fluents)
 
 ;remove requirements that are not needed
 (:requirements :strips :typing :negative-preconditions :equality)
@@ -9,11 +9,9 @@
     person
     robot
     location
-    item
     food medicine tool - item
     box
     carrier
-    cap_number
 )
 
 (:constants
@@ -41,10 +39,7 @@
     (need-medicine ?p - person)
     (need-tool ?p - person)
 
-
-    (capacity ?c - carrier ?cap - cap_number)
-    (capacity-predecessor ?cap1 ?cap2 - cap_number)
-
+    ;(delivered ?i - item ?p - person)
 
     ; otherwise two boxes can be filled with the same item at the same time
     (inbox ?i - item)
@@ -54,6 +49,11 @@
 
 
 (:functions ;todo: define numeric functions here
+    ; How many boxes are in the carrier right now
+    (carrier-load ?c - carrier)
+
+    ; Total number of boxes supported by the carrier
+    (carrier-capacity ?c - carrier)
 )
 
 ;define actions here
@@ -76,7 +76,7 @@
 )
 
 (:action load-carrier
-    :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier ?cap1 ?cap2 - cap_number)
+    :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier)
     :precondition (and (full ?b ?i)
                        (not (empty ?b))
                        (inbox ?i)
@@ -85,15 +85,13 @@
                        (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-carrier ?c ?l)
-                       (capacity-predecessor ?cap1 ?cap2)
-                       (capacity ?c ?cap2)
-
+                       (not (= (carrier-load ?c) (carrier-capacity ?c)))
 
     )
     :effect (and (loaded ?r ?b)
                  (not (free ?r))
-                 (capacity ?c ?cap1)
-                 (not (capacity ?c ?cap2))
+                 (increase (carrier-load ?c) 1)
+                       
     )
 )
 
@@ -114,6 +112,8 @@
                        (not (empty ?b))
                        (loaded ?r ?b)
                        (not (free ?r))
+                       ; If should go to depot, carrier capacity should be 0
+                       (or (not (= ?to depot)) (= (carrier-capacity ?c) 0))
     )
     :effect (and (at-robot ?r ?to)
                  (at-box ?b ?to)
@@ -130,7 +130,7 @@
 ; Control of full box is unecessary because if the robot has a box,
 ; it must be full
 (:action unloadrobot
-    :parameters (?r - robot ?b - box ?l - location ?c - carrier ?cap1 ?cap2 - cap_number)
+    :parameters (?r - robot ?b - box ?l - location ?c - carrier)
     :precondition (and (loaded ?r ?b)
                        (not (free ?r))
                        (not (empty ?b))
@@ -138,13 +138,11 @@
                        (at-box ?b ?l)
                        ; redundant but for kept for clarity
                        (at-carrier ?c ?l)
-                       (capacity-predecessor ?cap1 ?cap2)
-                       (capacity ?c ?cap1)
+                       (not (= (carrier-capacity ?c) 0))
     )
     :effect (and (not (loaded ?r ?b))
                  (free ?r)
-                 (capacity ?c ?cap2)
-                 (not (capacity ?c ?cap1))
+                 (decrease (carrier-capacity ?c) 1)
 
     )
 )

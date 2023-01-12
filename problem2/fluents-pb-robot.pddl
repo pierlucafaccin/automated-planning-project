@@ -1,4 +1,4 @@
-(define (problem robot-pb) (:domain robot)
+(define (problem robot-pb-fluents) (:domain robot-fluents)
 (:objects
 
     alice bob charles - person
@@ -8,11 +8,12 @@
     food1 - food
     tool1 - tool
     elicopter - carrier
-    capacity0 capacity1 capacity2 capacity3 - cap_number
 )
 
 (:init
     ;todo: put the initial state's facts and numeric values here
+    (= (carrier-capacity elicopter) 4)
+    (= (carrier-load elicopter) 0)
     (at-person alice verona) (at-person bob padova) (at-person charles verona)
     (at-box box1 depot) (at-box box2 depot) (at-box box3 depot)
     (at-robot agent depot)
@@ -23,19 +24,14 @@
 
     (free agent)
 
-    (need-medicine alice) (need-food bob) (need-tool bob)
-
-    (capacity-predecessor capacity0 capacity1) (capacity-predecessor capacity1 capacity2)
-    (capacity-predecessor capacity2 capacity3)
-
-    (capacity elicopter capacity3)
+    (need-medicine alice) (need-medicine bob) (need-tool bob)
 
 )
 
 (:goal (and
     ;todo: put the goal condition here
     (not (need-medicine alice))
-    (not (need-food bob))
+    (not (need-medicine bob))
     (not (need-tool bob))
     
 ))
