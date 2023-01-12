@@ -7,14 +7,18 @@
     medicine1 medicine2 - medicine
     food1 - food
     tool1 - tool
+    elicopter - carrier
 )
 
 (:init
     ;todo: put the initial state's facts and numeric values here
+    (= (carrier-capacity elicopter) 4)
+    (= (carrier-load elicopter) 0)
     (at-person alice verona) (at-person bob padova) (at-person charles verona)
     (at-box box1 depot) (at-box box2 depot) (at-box box3 depot)
     (at-robot agent depot)
     (at-item medicine1 depot) (at-item medicine2 depot) (at-item food1 depot) (at-item tool1 depot)
+    (at-carrier elicopter depot)
 
     (empty box1) (empty box2) (empty box3)
 

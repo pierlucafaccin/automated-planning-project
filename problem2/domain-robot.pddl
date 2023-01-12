@@ -13,7 +13,6 @@
     food medicine tool - item
     box
     carrier
-    elicopter drone truck - carrier
 )
 
 (:constants
@@ -51,7 +50,10 @@
 
 
 (:functions ;todo: define numeric functions here
+    ; How many boxes are in the carrier right now
     (carrier-load ?c - carrier)
+
+    ; Total number of boxes supported by the carrier
     (carrier-capacity ?c - carrier)
 )
 
@@ -74,8 +76,8 @@
     )
 )
 
-(:action load-robot
-    :parameters (?r - robot ?b - box ?l - location ?i - item)
+(:action load-carrier
+    :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier)
     :precondition (and (full ?b ?i)
                        (not (empty ?b))
                        (inbox ?i)
@@ -83,36 +85,45 @@
                        (free ?r)
                        (at-robot ?r ?l)
                        (at-box ?b ?l)
+                       (at-carrier ?c ?l)
+                       (not (= (carrier-load ?c) (carrier-capacity ?c)))
 
     )
     :effect (and (loaded ?r ?b)
                  (not (free ?r))
+                 (increase (carrier-load ?c) 1)
                        
     )
 )
 
 ; can be improved by adding the person who needs the item
 (:action move-with-box
-    :parameters (?r - robot ?from ?to - location ?b - box ?i - item)
+    :parameters (?r - robot ?from ?to - location ?b - box ?i - item ?c - carrier)
     :precondition (and (at-robot ?r ?from)
                        (at-box ?b ?from)
                        (at-item ?i ?from)
+                       (at-carrier ?c ?from)
                        (not (at-robot ?r ?to))
                        (not (at-box ?b ?to))
                        (not (at-item ?i ?to))
+                       (not (at-carrier ?c ?to))
                        ;(not (= ?from ?to))
                        (full ?b ?i)
                        (inbox ?i)
                        (not (empty ?b))
                        (loaded ?r ?b)
                        (not (free ?r))
+                       ; If should go to depot, carrier capacity should be 0
+                       (or (not (= ?to depot)) (= (carrier-capacity ?c) 0))
     )
     :effect (and (at-robot ?r ?to)
                  (at-box ?b ?to)
                  (at-item ?i ?to)
+                 (at-carrier ?c ?to)
                  (not (at-robot ?r ?from))
                  (not (at-box ?b ?from))
                  (not (at-item ?i ?from))
+                 (not (at-carrier ?c ?from))
     )
 )
 
@@ -120,15 +131,20 @@
 ; Control of full box is unecessary because if the robot has a box,
 ; it must be full
 (:action unloadrobot
-    :parameters (?r - robot ?b - box ?l - location)
+    :parameters (?r - robot ?b - box ?l - location ?c - carrier)
     :precondition (and (loaded ?r ?b)
                        (not (free ?r))
                        (not (empty ?b))
                        (at-robot ?r ?l)
                        (at-box ?b ?l)
+                       ; redundant but for kept for clarity
+                       (at-carrier ?c ?l)
+                       (not (= (carrier-capacity ?c) 0))
     )
     :effect (and (not (loaded ?r ?b))
                  (free ?r)
+                 (decrease (carrier-capacity ?c) 1)
+
     )
 )
 
@@ -190,12 +206,17 @@
 )
 
 (:action move
-    :parameters (?r - robot ?from ?to - location)
+    :parameters (?r - robot ?from ?to - location ?c - carrier)
     :precondition (and (at-robot ?r ?from)
+                       (at-carrier ?c ?from)
+                       (not (at-robot ?r ?to))
+                       (not (at-carrier ?c ?to))
                        (not (= ?from ?to))
     )
-    :effect (and (at-robot ?r ?to)
-                 (not (at-robot ?r ?from))
+    :effect (and (not (at-robot ?r ?from))
+                 (not (at-carrier ?c ?from))
+                 (at-robot ?r ?to)
+                 (at-carrier ?c ?to)
     )
 )
 
