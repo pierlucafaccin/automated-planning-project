@@ -1,6 +1,6 @@
 ;Header and description
 
-(define (domain robot-simple)
+(define (domain robot)
 
 ;remove requirements that are not needed
 (:requirements :strips :typing :negative-preconditions :equality)
@@ -12,6 +12,8 @@
     item
     food medicine tool - item
     box
+    carrier
+    elicopter drone truck - carrier
 )
 
 (:constants
@@ -27,6 +29,7 @@
     (at-box ?b - box ?l - location)
     (at-robot ?r - robot ?l - location)
     (at-item ?i - item ?l - location)
+    (at-carrier ?c - carrier ?l - location)
 
     (empty ?b - box)
     (full ?b - box ?i - item)
@@ -48,6 +51,8 @@
 
 
 (:functions ;todo: define numeric functions here
+    (carrier-load ?c - carrier)
+    (carrier-capacity ?c - carrier)
 )
 
 ;define actions here

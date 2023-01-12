@@ -1,4 +1,4 @@
-(define (problem robot-pb-simple) (:domain robot-simple)
+(define (problem robot-pb) (:domain robot)
 (:objects
 
     alice bob charles - person
