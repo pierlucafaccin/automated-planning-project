@@ -45,7 +45,6 @@
     (capacity ?c - carrier ?cap - cap_number)
     (capacity-predecessor ?cap1 ?cap2 - cap_number)
 
-
     ; otherwise two boxes can be filled with the same item at the same time
     (inbox ?i - item)
 
