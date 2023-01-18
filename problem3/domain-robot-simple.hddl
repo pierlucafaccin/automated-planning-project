@@ -1,0 +1,301 @@
+;Header and description
+
+(define (domain robot3-simple)
+
+;remove requirements that are not needed
+(:requirements :typing :negative-preconditions :hierachie)
+
+(:types ;todo: enumerate types and their hierarchy here, e.g. car truck bus - vehicle
+    person
+    robot
+    location
+    item
+    ;food medicine tool - item
+    box
+    carrier
+    cap_number
+)
+
+(:constants
+    depot - location
+    agent - robot
+)
+; un-comment following line if constants are needed
+;(:constants )
+
+(:predicates ;todo: define predicates here
+
+    (at-person ?p - person ?l - location)
+    (at-box ?b - box ?l - location)
+    (at-robot ?r - robot ?l - location)
+    (at-item ?i - item ?l - location)
+    (at-carrier ?c - carrier ?l - location)
+
+    (empty ?b - box)
+    (full ?b - box ?i - item)
+
+    (loaded ?r - robot ?b - box)
+    (free ?r - robot)
+
+    ;(need-food ?p - person)
+    ;(need-medicine ?p - person)
+    ;(need-tool ?p - person)
+    (need-item ?p - person)
+
+
+    (capacity ?c - carrier ?cap - cap_number)
+    (capacity-predecessor ?cap1 ?cap2 - cap_number)
+
+
+    ; otherwise two boxes can be filled with the same item at the same time
+    (inbox ?i - item)
+
+
+)
+
+;define tasks here
+
+(:task deliver
+		:parameters (?p - person)
+		:precondition ()
+		:effect ()
+	)
+
+(:task move_box
+		:parameters (?from ?to - location ?r - robot ?b - box)
+		:precondition ()
+		:effect ()
+	)
+
+(:task move_no_box
+		:parameters (?from ?to - location ?r - robot)
+		:precondition ()
+		:effect ()
+	)
+    
+
+(:task prepare-box
+		:parameters (?b - box ?r - robot ?i - item)
+		:precondition ()
+		:effect ()
+	)
+
+(:task give_box
+		:parameters (?r - robot ?b - box ?p - person ?i - item)
+		:precondition ()
+		:effect ()
+	)
+
+(:method m_deliver_ordering
+		:parameters (?from ?to - location ?b - box ?p - person ?r - robot ?c - carrier ?i - item)
+		:task (deliver ?p)
+		:subtasks (and
+		 (task0 (prepare-box ?b ?r ?i))
+		 (task1 (move-with-box ?r ?from ?to ?b ?i ?c))
+		 (task2 (give_box ?r ?b ?p ?i))
+         (task3 (move ?r ?from ?to ?c))
+		)
+		:ordering (and
+			(task0 < task1)
+			(task1 < task2)
+			(task2 < task3)
+		)
+	)
+
+(:method m_prepare_box
+		:parameters (?b - box ?r - robot ?i - item ?l - location ?c - carrier ?cap1 ?cap2 - cap_number)
+		:task (prepare-box ?b ?r ?i)
+		:subtasks (and
+		 (task0 (fill-item ?b ?r ?l ?i))
+		 (task1 (load-carrier ?r ?b ?l ?i ?c ?cap1 ?cap2))
+		)
+		:ordering (and
+			(task0 < task1)
+		)
+	)
+
+(:method m_give_box
+		:parameters (?b - box ?r - robot ?i - item ?l - location ?c - carrier ?cap1 ?cap2 - cap_number ?p - person)
+		:task (give_box ?r ?b ?p ?i)
+		:subtasks (and
+		 (task0 (unloadrobot ?r ?b ?l ?c ?cap1 ?cap2))
+		 (task1 (empty-box ?r ?b ?l ?i ?p))
+		)
+		:ordering (and 
+			(task0 < task1)
+		)
+	)
+
+(:method m_move_box
+		:parameters (?b - box ?r - robot ?i - item ?l - location ?c - carrier)
+		:task (move_box ?from ?to ?r ?b)
+		:subtasks (and
+		 (task0 (move-with-box ?r ?from ?to ?b ?i ?c))
+		)
+	)
+
+(:method m_move_no_box
+		:parameters (?b - box ?r - robot ?i - item ?l - location ?c - carrier)
+		:task (move_no_box ?from ?to ?r)
+		:subtasks (and
+		 (task0 (move ?r ?from ?to ?c))
+        )
+	)
+
+(:method m_same_place_box
+		:parameters (?b - box ?r - robot ?l - location ?c - carrier)
+		:task (move_box ?from ?to ?r ?b)
+		:subtasks (and
+		 (task0 (no_move ?r ?l ?c))
+		)
+	)
+
+(:method m_same_place_no_box
+		:parameters (?b - box ?r - robot ?l - location ?c - carrier)
+		:task (move_no_box ?from ?to ?r)
+		:subtasks (and
+		 (task0 (no_move ?r ?l ?c))
+		)
+	)
+
+
+
+;define actions here
+
+(:action fill-item
+    :parameters (?b - box ?r - robot ?l - location ?i - item)
+    :precondition (and ;(= ?l depot)
+                       (at-box ?b ?l)
+                       (at-robot ?r ?l)
+                       (at-item ?i ?l)
+                       (empty ?b)
+                       (not (full ?b ?i))
+                       (not (inbox ?i))
+    )
+    :effect (and (full ?b ?i)
+                 (not (empty ?b))
+                 (inbox ?i)
+    
+    )
+)
+
+(:action load-carrier
+    :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier ?cap1 ?cap2 - cap_number)
+    :precondition (and (full ?b ?i)
+                       (not (empty ?b))
+                       (inbox ?i)
+                       (not (loaded ?r ?b))
+                       (free ?r)
+                       (at-robot ?r ?l)
+                       (at-box ?b ?l)
+                       (at-carrier ?c ?l)
+                       (capacity-predecessor ?cap1 ?cap2)
+                       (capacity ?c ?cap2)
+
+
+    )
+    :effect (and (loaded ?r ?b)
+                 (not (free ?r))
+                 (capacity ?c ?cap1)
+                 (not (capacity ?c ?cap2))
+    )
+)
+
+; can be improved by adding the person who needs the item
+(:action move-with-box
+    :parameters (?r - robot ?from ?to - location ?b - box ?i - item ?c - carrier)
+    :precondition (and (at-robot ?r ?from)
+                       (at-box ?b ?from)
+                       (at-item ?i ?from)
+                       (at-carrier ?c ?from)
+                       (not (at-robot ?r ?to))
+                       (not (at-box ?b ?to))
+                       (not (at-item ?i ?to))
+                       (not (at-carrier ?c ?to))
+                       ;(not (= ?from ?to))
+                       (full ?b ?i)
+                       (inbox ?i)
+                       (not (empty ?b))
+                       (loaded ?r ?b)
+                       (not (free ?r))
+    )
+    :effect (and (at-robot ?r ?to)
+                 (at-box ?b ?to)
+                 (at-item ?i ?to)
+                 (at-carrier ?c ?to)
+                 (not (at-robot ?r ?from))
+                 (not (at-box ?b ?from))
+                 (not (at-item ?i ?from))
+                 (not (at-carrier ?c ?from))
+    )
+)
+
+; can be improved by adding the person who needs the item
+; Control of full box is unecessary because if the robot has a box,
+; it must be full
+(:action unloadrobot
+    :parameters (?r - robot ?b - box ?l - location ?c - carrier ?cap1 ?cap2 - cap_number)
+    :precondition (and (loaded ?r ?b)
+                       (not (free ?r))
+                       (not (empty ?b))
+                       (at-robot ?r ?l)
+                       (at-box ?b ?l)
+                       ; redundant but for kept for clarity
+                       (at-carrier ?c ?l)
+                       (capacity-predecessor ?cap1 ?cap2)
+                       (capacity ?c ?cap1)
+    )
+    :effect (and (not (loaded ?r ?b))
+                 (free ?r)
+                 (capacity ?c ?cap2)
+                 (not (capacity ?c ?cap1))
+
+    )
+)
+
+(:action empty-box
+    :parameters (?r - robot ?b - box ?l - location ?i - item ?p - person)
+    :precondition (and (at-robot ?r ?l)
+                       (at-box ?b ?l)
+                       (at-person ?p ?l)
+                       (at-item ?i ?l)
+                       (full ?b ?i)
+                       (not (loaded ?r ?b))
+                       (free ?r)
+                       (need-item ?p)
+                       (inbox ?i)
+
+    )
+    :effect (and (not (need-item ?p))
+                 (not (inbox ?i))
+                 (not (full ?b ?i))
+    )
+)
+
+(:action move
+    :parameters (?r - robot ?from ?to - location ?c - carrier)
+    :precondition (and (at-robot ?r ?from)
+                       (at-carrier ?c ?from)
+                       (not (at-robot ?r ?to))
+                       (not (at-carrier ?c ?to))
+                       ;(not (= ?from ?to))
+    )
+    :effect (and (not (at-robot ?r ?from))
+                 (not (at-carrier ?c ?from))
+                 (at-robot ?r ?to)
+                 (at-carrier ?c ?to)
+    )
+)
+
+(:action no_move
+    :parameters (?r - robot ?l - location ?c - carrier)
+    :precondition (and (at-carrier ?c ?l)
+                  (at-robot ?r ?l)
+    )
+
+    :effect ()
+)
+
+
+
+)
