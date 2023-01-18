@@ -57,15 +57,16 @@
 
 ;define actions here
 
-(:action fill-item
+(:durative-action fill-item
     :parameters (?b - box ?r - robot ?l - location ?i - item)
-    :precondition (and ;(= ?l depot)
-                       (at-box ?b ?l)
-                       (at-robot ?r ?l)
-                       (at-item ?i ?l)
-                       (empty ?b)
-                       (not (full ?b ?i))
-                       (not (inbox ?i))
+    :duration (= ?duration )
+    :condition (and ;(= ?l depot)
+                       (over all(at-box ?b ?l))
+                       (over all(at-robot ?r ?l))
+                       (over all(at-item ?i ?l))
+                       (at start(empty ?b))
+                       (at start(not (full ?b ?i)))
+                       (at start(not (inbox ?i)))
     )
     :effect (and (full ?b ?i)
                  (not (empty ?b))
@@ -74,9 +75,10 @@
     )
 )
 
-(:action load-carrier
+(:durative-action load-carrier
     :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier ?cap1 ?cap2 - cap_number)
-    :precondition (and (full ?b ?i)
+    :duration (= ?duration )
+    :condition (and (full ?b ?i)
                        (not (empty ?b))
                        (inbox ?i)
                        (not (loaded ?r ?b))
@@ -97,40 +99,42 @@
 )
 
 ; can be improved by adding the person who needs the item
-(:action move-with-box
+(:durative-action move-with-box
     :parameters (?r - robot ?from ?to - location ?b - box ?i - item ?c - carrier)
-    :precondition (and (at-robot ?r ?from)
-                       (at-box ?b ?from)
-                       (at-item ?i ?from)
-                       (at-carrier ?c ?from)
-                       (not (at-robot ?r ?to))
-                       (not (at-box ?b ?to))
-                       (not (at-item ?i ?to))
-                       (not (at-carrier ?c ?to))
+    :duration (= ?duration )
+    :condition (and (at start(at-robot ?r ?from))
+                       (at start(at-box ?b ?from))
+                       (at start(at-item ?i ?from))
+                       (at start(at-carrier ?c ?from))
+                       (at start(not (at-robot ?r ?to)))
+                       (at start(not (at-box ?b ?to)))
+                       (at start(not (at-item ?i ?to)))
+                       (at start(not (at-carrier ?c ?to)))
                        ;(not (= ?from ?to))
-                       (full ?b ?i)
-                       (inbox ?i)
-                       (not (empty ?b))
-                       (loaded ?r ?b)
-                       (not (free ?r))
+                       (over all(full ?b ?i)))
+                       (over all(inbox ?i))
+                       (over all(not (empty ?b)))
+                       (over all(loaded ?r ?b))
+                       (over all(not (free ?r)))
     )
-    :effect (and (at-robot ?r ?to)
-                 (at-box ?b ?to)
-                 (at-item ?i ?to)
-                 (at-carrier ?c ?to)
-                 (not (at-robot ?r ?from))
-                 (not (at-box ?b ?from))
-                 (not (at-item ?i ?from))
-                 (not (at-carrier ?c ?from))
+    :effect (and (at end(at-robot ?r ?to))
+                 (at end(at-box ?b ?to))
+                 (at end(at-item ?i ?to))
+                 (at end(at-carrier ?c ?to))
+                 (at end(not (at-robot ?r ?from)))
+                 (at end(not (at-box ?b ?from)))
+                 (at end(not (at-item ?i ?from)))
+                 (at end(not (at-carrier ?c ?from)))
     )
 )
 
 ; can be improved by adding the person who needs the item
 ; Control of full box is unecessary because if the robot has a box,
 ; it must be full
-(:action unloadrobot
+(:durative-action unloadrobot
     :parameters (?r - robot ?b - box ?l - location ?c - carrier ?cap1 ?cap2 - cap_number)
-    :precondition (and (loaded ?r ?b)
+    :duration (= ?duration )
+    :condition (and (loaded ?r ?b)
                        (not (free ?r))
                        (not (empty ?b))
                        (at-robot ?r ?l)
@@ -148,9 +152,10 @@
     )
 )
 
-(:action empty-box-food
+(:durative-action empty-box-food
     :parameters (?r - robot ?b - box ?l - location ?f - food ?p - person)
-    :precondition (and (at-robot ?r ?l)
+    :duration (= ?duration )
+    :condition (and (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-person ?p ?l)
                        (at-item ?f ?l)
@@ -167,9 +172,10 @@
     )
 )
 
-(:action empty-box-medicine
+(:durative-action empty-box-medicine
     :parameters (?r - robot ?b - box ?l - location ?m - medicine ?p - person)
-    :precondition (and (at-robot ?r ?l)
+    :duration (= ?duration )
+    :condition (and (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-person ?p ?l)
                        (at-item ?m ?l)
@@ -186,9 +192,10 @@
     )
 )
 
-(:action empty-box-tool
+(:durative-action empty-box-tool
     :parameters (?r - robot ?b - box ?l - location ?t - tool ?p - person)
-    :precondition (and (at-robot ?r ?l)
+    :duration (= ?duration )
+    :condition (and (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-person ?p ?l)
                        (at-item ?t ?l)
@@ -205,20 +212,19 @@
     )
 )
 
-(:action move
+(:durative-action move
     :parameters (?r - robot ?from ?to - location ?c - carrier)
-    :precondition (and (at-robot ?r ?from)
-                       (at-carrier ?c ?from)
-                       (not (at-robot ?r ?to))
-                       (not (at-carrier ?c ?to))
-                       (not (= ?from ?to))
+    :duration (= ?duration )
+    :condition (and (at start(at-robot ?r ?from))
+                       (at start(at-carrier ?c ?from))
+                       (at start(not (at-robot ?r ?to)))
+                       (at start(not (at-carrier ?c ?to)))
+                       (over all(not (= ?from ?to)))
     )
-    :effect (and (not (at-robot ?r ?from))
-                 (not (at-carrier ?c ?from))
-                 (at-robot ?r ?to)
-                 (at-carrier ?c ?to)
+    :effect (and (at end(not (at-robot ?r ?from)))
+                 (at end(not (at-carrier ?c ?from)))
+                 (at end(at-robot ?r ?to))
+                 (at end(at-carrier ?c ?to))
     )
 )
 
-
-)
