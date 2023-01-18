@@ -20,4 +20,5 @@ To use the files in this repository, you will need a planning system such as Fas
 
 ## Contributions
 
-This project was developed by @Zinni98 and @pierlucafaccin as part of their master's degree studies at the University of Trento. If you have any questions or suggestions, please feel free to contact us or open an issue on this repository.
+This project was developed by [Alessandro Zinni](https://github.com/Zinni98) and [Pierluca Faccin](https://github.com/pierlucafaccin) as part of their master's degree studies at the University of Trento. If you have any questions or suggestions, please feel free to contact us or open an issue on this repository.
+
