@@ -78,7 +78,7 @@
 (:durative-action load-carrier
     :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier ?cap1 ?cap2 - cap_number)
     :duration (= ?duration 4)
-    :condition (and (full ?b ?i)
+    :condition (and  (over all (full ?b ?i))
                        (over all(not (empty ?b)))
                        (over all(inbox ?i))
                        (at start(not (loaded ?r ?b)))
