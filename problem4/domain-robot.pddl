@@ -114,7 +114,7 @@
                        (at start(not (at-item ?i ?to)))
                        (at start(not (at-carrier ?c ?to)))
                        ;(not (= ?from ?to))
-                       (over all(full ?b ?i)))
+                       (over all(full ?b ?i))
                        (over all(inbox ?i))
                        (over all(not (empty ?b)))
                        (over all(loaded ?r ?b))
@@ -236,5 +236,7 @@
                  (at end(at-robot ?r ?to))
                  (at end(at-carrier ?c ?to))
     )
+)
+
 )
 
