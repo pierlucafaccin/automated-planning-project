@@ -56,7 +56,6 @@
 )
 
 ;define actions here
-
 (:durative-action fill-item
     :parameters (?b - box ?r - robot ?l - location ?i - item)
     :duration (= ?duration 5)
