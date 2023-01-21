@@ -126,7 +126,6 @@
                     (over all(inbox ?i))
                     (over all(not (empty ?b)))
                     (over all(loaded ?r ?b))
-                    ;(not (= ?from ?to))
                     
     )
     :effect (and (at end(at-robot ?r ?to))
@@ -275,6 +274,19 @@
                  (at end(not (inbox ?t)))
                  (at end(not (full ?b ?t)))
                  (at end (not(emptying ?r)))
+    )
+)
+
+(:durative-action move
+    :parameters (?r - robot ?from ?to - location ?c - carrier)
+    :duration (= ?duration 10)
+    :condition (and (at start(at-robot ?r ?from))
+                    (at start(at-carrier ?c ?from))
+    )
+    :effect (and (at start(not (at-robot ?r ?from)))
+                 (at start(not (at-carrier ?c ?from)))
+                 (at end(at-robot ?r ?to))
+                 (at end(at-carrier ?c ?to))
     )
 )
 
