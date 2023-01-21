@@ -21,8 +21,8 @@
     (at-carrier elicopter depot)
 
     (empty box1) (empty box2) ;(empty box3)
-    (equal box1 box1)
-    (equal box2 box2)
+    (equalbox box1 box1)
+    (equalbox box2 box2)
 
     ;(free agent)
 
