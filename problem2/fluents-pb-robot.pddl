@@ -44,7 +44,7 @@
 
     (= (carrier-capacity elicopter) 4)
     (= (carrier-load elicopter) 0)
-    (= (battery-amount agent) 10000)
+    (= (total-cost) 0)
 
 )
 
@@ -58,6 +58,6 @@
     
 ))
 
-(:metric maximize (battery-amount))
+(:metric minimize (total-cost))
 
 )

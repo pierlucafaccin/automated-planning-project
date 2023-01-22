@@ -33,7 +33,6 @@
     (full ?b - box ?i - item)
 
     (loaded ?r - robot ?b - box)
-    (free ?r - robot)
 
     (need-food ?p - person)
     (need-medicine ?p - person)
@@ -51,10 +50,11 @@
     (carrier-load ?c - carrier)
     ; Total number of boxes supported by the carrier
     (carrier-capacity ?c - carrier)
-    (battery-amount ?r - robot)
+    (total-cost)
 )
 
-;define actions here
+
+
 
 (:action fill-item
     :parameters (?b - box ?r - robot ?l - location ?i - item)
@@ -79,7 +79,6 @@
                        (not (empty ?b))
                        (inbox ?i)
                        (not (loaded ?r ?b))
-                       (free ?r)
                        (at-robot ?r ?l)
                        (at-box ?b ?l)
                        (at-carrier ?c ?l)
@@ -87,7 +86,6 @@
 
     )
     :effect (and (loaded ?r ?b)
-                 (not (free ?r))
                  (increase (carrier-load ?c) 1)
                        
     )
@@ -100,6 +98,7 @@
                        (at-box ?b ?from)
                        (at-item ?i ?from)
                        (at-carrier ?c ?from)
+                       (not (= ?to depot))
                        (not (at-robot ?r ?to))
                        (not (at-box ?b ?to))
                        (not (at-item ?i ?to))
@@ -108,7 +107,6 @@
                        (inbox ?i)
                        (not (empty ?b))
                        (loaded ?r ?b)
-                       (not (free ?r))
                        ; If it goes to depot, carrier capacity should be 0
                        (or (not (= ?to depot)) (= (carrier-capacity ?c) 0))
     )
@@ -120,7 +118,7 @@
                  (not (at-box ?b ?from))
                  (not (at-item ?i ?from))
                  (not (at-carrier ?c ?from))
-                 (decrease (battery-amount ?r) 1)
+                 (increase (total-cost) 1)
     )
 )
 
@@ -133,6 +131,7 @@
                        (at-item ?i2 ?from)
                        (at-carrier ?c ?from)
                        (not (= ?from ?to))
+                       (not (= ?to depot))
                        (full ?b1 ?i1)
                        (full ?b2 ?i2)
                        (inbox ?i1)
@@ -157,7 +156,7 @@
                  (not (at-item ?i1 ?from))
                  (not (at-item ?i2 ?from))
                  (not (at-carrier ?c ?from))
-                 (decrease (battery-amount ?r) 1)
+                 (increase (total-cost) 1)
     )
 )
 
@@ -172,6 +171,7 @@
                        (at-item ?i3 ?from)
                        (at-carrier ?c ?from)
                        (not (= ?from ?to))
+                       (not (= ?to depot))
                        (full ?b1 ?i1)
                        (full ?b2 ?i2)
                        (full ?b3 ?i3)
@@ -206,7 +206,7 @@
                  (not (at-item ?i2 ?from))
                  (not (at-item ?i3 ?from))
                  (not (at-carrier ?c ?from))
-                 (decrease (battery-amount ?r) 1)
+                 (increase (total-cost) 1)
     )
 )
 
@@ -223,6 +223,7 @@
                        (at-item ?i4 ?from)
                        (at-carrier ?c ?from)
                        (not (= ?from ?to))
+                       (not (= ?to depot))
                        (full ?b1 ?i1)
                        (full ?b2 ?i2)
                        (full ?b3 ?i3)
@@ -268,7 +269,7 @@
                  (not (at-item ?i3 ?from))
                  (not (at-item ?i4 ?from))
                  (not (at-carrier ?c ?from))
-                 (decrease (battery-amount ?r) 1)
+                 (increase (total-cost) 1)
     )
 )
 
@@ -278,7 +279,6 @@
 (:action unloadrobot
     :parameters (?r - robot ?b - box ?l - location ?c - carrier)
     :precondition (and (loaded ?r ?b)
-                       (not (free ?r))
                        (not (empty ?b))
                        (at-robot ?r ?l)
                        (at-box ?b ?l)
@@ -286,7 +286,6 @@
                        (not (= (carrier-capacity ?c) 0))
     )
     :effect (and (not (loaded ?r ?b))
-                 (free ?r)
                  (decrease (carrier-capacity ?c) 1)
 
     )
@@ -300,7 +299,6 @@
                        (at-item ?f ?l)
                        (full ?b ?f)
                        (not (loaded ?r ?b))
-                       (free ?r)
                        (need-food ?p)
                        (inbox ?f)
 
@@ -319,7 +317,6 @@
                        (at-item ?m ?l)
                        (full ?b ?m)
                        (not (loaded ?r ?b))
-                       (free ?r)
                        (need-medicine ?p)
                        (inbox ?m)
 
@@ -338,7 +335,6 @@
                        (at-item ?t ?l)
                        (full ?b ?t)
                        (not (loaded ?r ?b))
-                       (free ?r)
                        (need-tool ?p)
                        (inbox ?t)
 
@@ -361,7 +357,7 @@
                  (not (at-carrier ?c ?from))
                  (at-robot ?r ?to)
                  (at-carrier ?c ?to)
-                 (decrease (battery-amount ?r) 5)
+                 (increase (total-cost) 10)
     )
 )
 

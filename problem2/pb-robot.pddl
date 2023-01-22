@@ -56,5 +56,4 @@
     (not (need-tool mallory))
     
 ))
-(:metric minimize (total-cost))
 )
