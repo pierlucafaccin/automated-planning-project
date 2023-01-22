@@ -51,6 +51,7 @@
     (carrier-load ?c - carrier)
     ; Total number of boxes supported by the carrier
     (carrier-capacity ?c - carrier)
+    (battery-amount ?r - robot)
 )
 
 ;define actions here
@@ -119,6 +120,7 @@
                  (not (at-box ?b ?from))
                  (not (at-item ?i ?from))
                  (not (at-carrier ?c ?from))
+                 (decrease (battery-amount ?r) 1)
     )
 )
 
@@ -155,6 +157,7 @@
                  (not (at-item ?i1 ?from))
                  (not (at-item ?i2 ?from))
                  (not (at-carrier ?c ?from))
+                 (decrease (battery-amount ?r) 1)
     )
 )
 
@@ -203,6 +206,7 @@
                  (not (at-item ?i2 ?from))
                  (not (at-item ?i3 ?from))
                  (not (at-carrier ?c ?from))
+                 (decrease (battery-amount ?r) 1)
     )
 )
 
@@ -264,6 +268,7 @@
                  (not (at-item ?i3 ?from))
                  (not (at-item ?i4 ?from))
                  (not (at-carrier ?c ?from))
+                 (decrease (battery-amount ?r) 1)
     )
 )
 
@@ -356,6 +361,7 @@
                  (not (at-carrier ?c ?from))
                  (at-robot ?r ?to)
                  (at-carrier ?c ?to)
+                 (decrease (battery-amount ?r) 5)
     )
 )
 

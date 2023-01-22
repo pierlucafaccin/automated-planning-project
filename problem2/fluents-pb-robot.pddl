@@ -44,6 +44,7 @@
 
     (= (carrier-capacity elicopter) 4)
     (= (carrier-load elicopter) 0)
+    (= (battery-amount agent) 10000)
 
 )
 
@@ -56,4 +57,7 @@
     (not (need-tool mallory))
     
 ))
+
+(:metric maximize (battery-amount))
+
 )
