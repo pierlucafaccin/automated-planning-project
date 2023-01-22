@@ -38,15 +38,11 @@
     (need-medicine ?p - person)
     (need-tool ?p - person)
 
-    ;(delivered ?i - item ?p - person)
-
     ; otherwise two boxes can be filled with the same item at the same time
     (inbox ?i - item)
 
 
 )
-
-
 (:functions ;todo: define numeric functions here
 )
 
@@ -54,7 +50,7 @@
 
 (:action fill-item
     :parameters (?b - box ?r - robot ?l - location ?i - item)
-    :precondition (and ;(= ?l depot)
+    :precondition (and (= ?l depot)
                        (at-box ?b ?l)
                        (at-robot ?r ?l)
                        (at-item ?i ?l)
@@ -73,8 +69,8 @@
     :parameters (?r - robot ?b - box ?l - location ?i - item)
     :precondition (and (full ?b ?i)
                        (not (empty ?b))
-                       (inbox ?i)
                        (not (loaded ?r ?b))
+                       (inbox ?i)
                        (free ?r)
                        (at-robot ?r ?l)
                        (at-box ?b ?l)
@@ -86,7 +82,7 @@
     )
 )
 
-; can be improved by adding the person who needs the item
+
 (:action move-with-box
     :parameters (?r - robot ?from ?to - location ?b - box ?i - item)
     :precondition (and (at-robot ?r ?from)
@@ -95,7 +91,6 @@
                        (not (at-robot ?r ?to))
                        (not (at-box ?b ?to))
                        (not (at-item ?i ?to))
-                       ;(not (= ?from ?to))
                        (full ?b ?i)
                        (inbox ?i)
                        (not (empty ?b))

@@ -106,7 +106,6 @@
                        (not (at-box ?b ?to))
                        (not (at-item ?i ?to))
                        (not (at-carrier ?c ?to))
-                       ;(not (= ?from ?to))
                        (full ?b ?i)
                        (inbox ?i)
                        (not (empty ?b))

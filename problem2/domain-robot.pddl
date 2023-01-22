@@ -96,18 +96,14 @@
     )
 )
 
-; can be improved by adding the person who needs the item
+
 (:action move-with-box
     :parameters (?r - robot ?from ?to - location ?b - box ?i - item ?c - carrier)
     :precondition (and (at-robot ?r ?from)
                        (at-box ?b ?from)
                        (at-item ?i ?from)
                        (at-carrier ?c ?from)
-                       (not (at-robot ?r ?to))
-                       (not (at-box ?b ?to))
-                       (not (at-item ?i ?to))
-                       (not (at-carrier ?c ?to))
-                       ;(not (= ?from ?to))
+                       (not (= ?from ?to))
                        (full ?b ?i)
                        (inbox ?i)
                        (not (empty ?b))
