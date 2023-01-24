@@ -35,8 +35,8 @@ ament_target_dependencies(load_carrier_node ${dependencies})
 add_executable(empty_box_food_node src/empty_box_food_node.cpp)
 ament_target_dependencies(empty_box_food_node ${dependencies})
 
-add_executable(empty_box_medicine_node src/empty_medicine_food_node.cpp)
-ament_target_dependencies(empty_medicine_food_node ${dependencies})
+add_executable(empty_box_medicine_node src/empty_box_medicine_node.cpp)
+ament_target_dependencies(empty_box_medicine_node ${dependencies})
 
 add_executable(empty_box_tool_node src/empty_box_tool_node.cpp)
 ament_target_dependencies(empty_box_tool_node ${dependencies})
