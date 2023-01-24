@@ -23,8 +23,8 @@ ament_target_dependencies(move_node ${dependencies})
 add_executable(move_with_box_node src/move_with_box_node.cpp)
 ament_target_dependencies(move_with_box_node ${dependencies})
 
-add_executable(move_with_box_node2 src/move_with_box_node2.cpp)
-ament_target_dependencies(move_with_box_node2 ${dependencies})
+add_executable(move_with_box2_node src/move_with_box2_node.cpp)
+ament_target_dependencies(move_with_box2_node ${dependencies})
 
 add_executable(fill_item_node src/fill_item_node.cpp)
 ament_target_dependencies(fill_item_node ${dependencies})
@@ -49,7 +49,7 @@ install(DIRECTORY launch pddl DESTINATION share/${PROJECT_NAME})
 install(TARGETS
   move_node
   move_with_box_node
-  move_with_box_node2
+  move_with_box2_node
   load_carrier_node
   fill_item_node
   empty_box_food_node
