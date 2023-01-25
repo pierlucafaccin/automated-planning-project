@@ -8,7 +8,7 @@
     ;food1 - food
     tool1 - tool
     elicopter - carrier
-    capacity0 capacity1 capacity2 capacity3 - cap_number
+    capacity0 capacity1 capacity2 capacity3 capacity4 - cap_number
 )
 
 (:init
@@ -29,9 +29,9 @@
     (need-medicine alice) (need-tool bob) ;(need-food bob)
 
     (capacity-predecessor capacity0 capacity1) (capacity-predecessor capacity1 capacity2)
-    (capacity-predecessor capacity2 capacity3)
+    (capacity-predecessor capacity2 capacity3) (capacity-predecessor capacity3 capacity4)
 
-    (capacity elicopter capacity3)
+    (capacity elicopter capacity4)
 
 )
 
