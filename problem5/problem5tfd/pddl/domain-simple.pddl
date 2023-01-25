@@ -14,11 +14,6 @@
     cap_number - object
 )
 
-(:constants
-    depot - location
-    agent - robot
-)
-
 (:predicates ;todo: define predicates here
 
     (at-person ?p - person ?l - location)
