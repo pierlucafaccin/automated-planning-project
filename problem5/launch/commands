@@ -1,58 +1,39 @@
 set instance alice person
 set instance bob person
 set instance charles person
-
 set instance agent robot 
-
 set instance depot location
 set instance verona location
 set instance padova location
-
 set instance box1 box
 set instance box2 box
-
 set instance medicine1 medicine
 set instance medicine2 medicine
-
 set instance tool1 tool
-
 set instance elicopter carrier
-
 set instance capacity0 cap_number
 set instance capacity1 cap_number
 set instance capacity2 cap_number
 set instance capacity3 cap_number
 set instance capacity4 cap_number
-
 set predicate (at-robot agent depot)
-
 set predicate (at-person bob padova)
 set predicate (at-person alice verona)
-
 set predicate (at-box box1 depot)
 set predicate (at-box box2 depot)
-
 set predicate (at-item medicine1 depot)
 set predicate (at-item medicine2 depot)
-
 set predicate (at-item tool1 depot)
-
 set predicate (at-carrier elicopter depot)
-
 set predicate (empty box1)
 set predicate (empty box2)
-
 set predicate (equalbox box1 box1)
 set predicate (equalbox box2 box2)
-
 set predicate (need-medicine alice)
 set predicate (need-tool bob)
-
 set predicate (capacity-predecessor capacity0 capacity1)
 set predicate (capacity-predecessor capacity1 capacity2)
 set predicate (capacity-predecessor capacity2 capacity3)
 set predicate (capacity-predecessor capacity3 capacity4)
-
 set predicate (capacity elicopter capacity3)
-
 set goal (and (not (need-medicine alice)) (not (need-tool bob)))

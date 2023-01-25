@@ -8,11 +8,11 @@
 
 using namespace std::chrono_literals;
 
-class EmptyTool : public plansys2::ActionExecutorClient
+class EmptyMedicine : public plansys2::ActionExecutorClient
 {
 public:
-  EmptyTool()
-  : plansys2::ActionExecutorClient("empty", 100ms)
+  EmptyMedicine()
+  : plansys2::ActionExecutorClient("emptymedicine", 100ms)
   {
     progress_ = 0.0;
   }
@@ -22,9 +22,9 @@ private:
   {
     if (progress_ < 1.0) {
       progress_ += 0.034;
-      send_feedback(progress_, "Empty running");
+      send_feedback(progress_, "Empty medicine running");
     } else {
-      finish(true, 1.0, "Empty  completed");
+      finish(true, 1.0, "Empty medicine completed");
 
       progress_ = 0.0;
       std::cout << std::endl;
@@ -41,9 +41,9 @@ private:
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<EmptyTool>();
+  auto node = std::make_shared<EmptyMedicine>();
 
-  node->set_parameter(rclcpp::Parameter("action_name", "empty"));
+  node->set_parameter(rclcpp::Parameter("action_name", "emptymedicine"));
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
 
   rclcpp::spin(node->get_node_base_interface());

@@ -12,7 +12,7 @@ class EmptyFood : public plansys2::ActionExecutorClient
 {
 public:
   EmptyFood()
-  : plansys2::ActionExecutorClient("empty", 100ms)
+  : plansys2::ActionExecutorClient("emptyfood", 100ms)
   {
     progress_ = 0.0;
   }
@@ -22,9 +22,9 @@ private:
   {
     if (progress_ < 1.0) {
       progress_ += 0.034;
-      send_feedback(progress_, "Empty running");
+      send_feedback(progress_, "Empty food running");
     } else {
-      finish(true, 1.0, "Empty  completed");
+      finish(true, 1.0, "Empty food completed");
 
       progress_ = 0.0;
       std::cout << std::endl;
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
   rclcpp::init(argc, argv);
   auto node = std::make_shared<EmptyFood>();
 
-  node->set_parameter(rclcpp::Parameter("action_name", "empty"));
+  node->set_parameter(rclcpp::Parameter("action_name", "emptyfood"));
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
 
   rclcpp::spin(node->get_node_base_interface());
