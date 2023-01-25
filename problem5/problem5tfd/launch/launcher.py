@@ -151,7 +151,7 @@ def generate_launch_description():
     ld.add_action(move_cmd)
     ld.add_action(move_with_box_cmd)
     ld.add_action(move_with_box2_cmd)
-    ld.add_action(move_with_box2_cmd)
+    ld.add_action(move_with_box3_cmd)
     ld.add_action(move_with_box4_cmd)
     ld.add_action(load_carrier_cmd)
     ld.add_action(fill_item_cmd)
