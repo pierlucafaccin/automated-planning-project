@@ -18,8 +18,6 @@
     depot - location
     agent - robot
 )
-; un-comment following line if constants are needed
-;(:constants )
 
 (:predicates ;todo: define predicates here
 
@@ -57,10 +55,6 @@
 
 )
 
-
-(:functions ;todo: define numeric functions here
-)
-
 ;define actions here
 (:durative-action fill-item
     :parameters (?b - box ?r - robot ?l - location ?i - item)
@@ -89,7 +83,6 @@
     )
 )
 
-
 (:durative-action load-carrier
     :parameters (?r - robot ?b - box ?l - location ?i - item ?c - carrier ?cap1 ?cap2 - cap_number)
     :duration (= ?duration 4)
@@ -112,6 +105,19 @@
                  ; can load more than two boxes at the same time
                  (at start(loading ?r))
                  (at end(not (loading ?r)))
+    )
+)
+
+(:durative-action move
+    :parameters (?r - robot ?from ?to - location ?c - carrier)
+    :duration (= ?duration 10)
+    :condition (and (at start(at-robot ?r ?from))
+                    (at start(at-carrier ?c ?from))
+    )
+    :effect (and (at start(not (at-robot ?r ?from)))
+                 (at start(not (at-carrier ?c ?from)))
+                 (at end(at-robot ?r ?to))
+                 (at end(at-carrier ?c ?to))
     )
 )
 
@@ -138,7 +144,6 @@
                  (at start(not (at-carrier ?c ?from)))
     )
 )
-
 
 (:durative-action move-with-box2
     :parameters (?r - robot ?from ?to - location ?b1 ?b2 - box ?i1 ?i2 - item ?c - carrier)
@@ -172,6 +177,115 @@
                  (at start(not (at-box ?b2 ?from)))
                  (at start(not (at-item ?i1 ?from)))
                  (at start(not (at-item ?i2 ?from)))
+                 (at start(not (at-carrier ?c ?from)))
+    )
+)
+
+(:durative-action move-with-box3
+    :parameters (?r - robot ?from ?to - location ?b1 ?b2 ?b3 - box ?i1 ?i2 ?i3 - item ?c - carrier)
+    :duration (= ?duration 10)
+    :condition (and (at start(at-robot ?r ?from))
+                    (at start(at-box ?b1 ?from))
+                    (at start(at-box ?b2 ?from))
+                    (at start(at-box ?b3 ?from))
+                    (at start(at-item ?i1 ?from))
+                    (at start(at-item ?i2 ?from))
+                    (at start(at-item ?i3 ?from))
+                    (at start(at-carrier ?c ?from))
+                    (over all(full ?b1 ?i1))
+                    (over all(full ?b2 ?i2))
+                    (over all(full ?b3 ?i3))
+                    (over all(inbox ?i1))
+                    (over all(inbox ?i2))
+                    (over all(inbox ?i3))
+                    (over all(not (empty ?b1)))
+                    (over all(not (empty ?b2)))
+                    (over all(not (empty ?b3)))
+                    (over all(loaded ?r ?b1))
+                    (over all(loaded ?r ?b2))
+                    (over all(loaded ?r ?b3))
+                    (over all(not (equalbox ?b1 ?b2)))
+                    (over all(not (equalbox ?b1 ?b2)))
+                    (over all(not (equalbox ?b2 ?b3)))
+                    ;(not (= ?from ?to))
+                    
+    )
+    :effect (and (at end(at-robot ?r ?to))
+                 (at end(at-box ?b1 ?to))
+                 (at end(at-box ?b2 ?to))
+                 (at end(at-box ?b3 ?to))
+                 (at end(at-item ?i1 ?to))
+                 (at end(at-item ?i2 ?to))
+                 (at end(at-item ?i3 ?to))
+                 (at end(at-carrier ?c ?to))
+                 (at start(not (at-robot ?r ?from)))
+                 (at start(not (at-box ?b1 ?from)))
+                 (at start(not (at-box ?b2 ?from)))
+                 (at start(not (at-box ?b3 ?from)))
+                 (at start(not (at-item ?i1 ?from)))
+                 (at start(not (at-item ?i2 ?from)))
+                 (at start(not (at-item ?i3 ?from)))
+                 (at start(not (at-carrier ?c ?from)))
+    )
+)
+
+(:durative-action move-with-box4
+    :parameters (?r - robot ?from ?to - location ?b1 ?b2 ?b3 ?b4 - box ?i1 ?i2 ?i3 ?i4 - item ?c - carrier)
+    :duration (= ?duration 10)
+    :condition (and (at start(at-robot ?r ?from))
+                    (at start(at-box ?b1 ?from))
+                    (at start(at-box ?b2 ?from))
+                    (at start(at-box ?b3 ?from))
+                    (at start(at-box ?b4 ?from))
+                    (at start(at-item ?i1 ?from))
+                    (at start(at-item ?i2 ?from))
+                    (at start(at-item ?i3 ?from))
+                    (at start(at-item ?i4 ?from))
+                    (at start(at-carrier ?c ?from))
+                    (over all(full ?b1 ?i1))
+                    (over all(full ?b2 ?i2))
+                    (over all(full ?b3 ?i3))
+                    (over all(full ?b4 ?i4))
+                    (over all(inbox ?i1))
+                    (over all(inbox ?i2))
+                    (over all(inbox ?i3))
+                    (over all(inbox ?i4))
+                    (over all(not (empty ?b1)))
+                    (over all(not (empty ?b2)))
+                    (over all(not (empty ?b3)))
+                    (over all(not (empty ?b4)))
+                    (over all(loaded ?r ?b1))
+                    (over all(loaded ?r ?b2))
+                    (over all(loaded ?r ?b3))
+                    (over all(loaded ?r ?b4))
+                    (over all(not (equalbox ?b1 ?b2)))
+                    (over all(not (equalbox ?b2 ?b3)))
+                    (over all(not (equalbox ?b2 ?b4)))
+                    (over all(not (equalbox ?b1 ?b3)))
+                    (over all(not (equalbox ?b1 ?b4)))
+                    (over all(not (equalbox ?b3 ?b4)))
+                    ;(not (= ?from ?to))
+                    
+    )
+    :effect (and (at end(at-robot ?r ?to))
+                 (at end(at-box ?b1 ?to))
+                 (at end(at-box ?b2 ?to))
+                 (at end(at-box ?b3 ?to))
+                 (at end(at-box ?b4 ?to))
+                 (at end(at-item ?i1 ?to))
+                 (at end(at-item ?i2 ?to))
+                 (at end(at-item ?i3 ?to))
+                 (at end(at-item ?i4 ?to))
+                 (at end(at-carrier ?c ?to))
+                 (at start(not (at-robot ?r ?from)))
+                 (at start(not (at-box ?b1 ?from)))
+                 (at start(not (at-box ?b2 ?from)))
+                 (at start(not (at-box ?b3 ?from)))
+                 (at start(not (at-box ?b4 ?from)))
+                 (at start(not (at-item ?i1 ?from)))
+                 (at start(not (at-item ?i2 ?from)))
+                 (at start(not (at-item ?i3 ?from)))
+                 (at start(not (at-item ?i4 ?from)))
                  (at start(not (at-carrier ?c ?from)))
     )
 )
@@ -274,19 +388,6 @@
                  (at end(not (inbox ?t)))
                  (at end(not (full ?b ?t)))
                  (at end (not(emptying ?r)))
-    )
-)
-
-(:durative-action move
-    :parameters (?r - robot ?from ?to - location ?c - carrier)
-    :duration (= ?duration 10)
-    :condition (and (at start(at-robot ?r ?from))
-                    (at start(at-carrier ?c ?from))
-    )
-    :effect (and (at start(not (at-robot ?r ?from)))
-                 (at start(not (at-carrier ?c ?from)))
-                 (at end(at-robot ?r ?to))
-                 (at end(at-carrier ?c ?to))
     )
 )
 

@@ -26,6 +26,12 @@ ament_target_dependencies(move_with_box_node ${dependencies})
 add_executable(move_with_box2_node src/move_with_box2_node.cpp)
 ament_target_dependencies(move_with_box2_node ${dependencies})
 
+add_executable(move_with_box3_node src/move_with_box3_node.cpp)
+ament_target_dependencies(move_with_box3_node ${dependencies})
+
+add_executable(move_with_box4_node src/move_with_box4_node.cpp)
+ament_target_dependencies(move_with_box4_node ${dependencies})
+
 add_executable(fill_item_node src/fill_item_node.cpp)
 ament_target_dependencies(fill_item_node ${dependencies})
 
@@ -50,6 +56,8 @@ install(TARGETS
   move_node
   move_with_box_node
   move_with_box2_node
+  move_with_box3_node
+  move_with_box4_node
   load_carrier_node
   fill_item_node
   empty_box_food_node

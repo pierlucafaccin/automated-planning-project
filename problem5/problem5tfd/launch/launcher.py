@@ -71,6 +71,22 @@ def generate_launch_description():
         output='screen',
         parameters=[])
 
+    move_with_box3_cmd = Node(
+        package='problem5',
+        executable='move_with_box3_node',
+        name='move_with_box3_node',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+
+    move_with_box4_cmd = Node(
+        package='problem5',
+        executable='move_with_box4_node',
+        name='move_with_box4_node',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+
     fill_item_cmd = Node(
         package='problem5',
         executable='fill_item_node',
@@ -135,6 +151,8 @@ def generate_launch_description():
     ld.add_action(move_cmd)
     ld.add_action(move_with_box_cmd)
     ld.add_action(move_with_box2_cmd)
+    ld.add_action(move_with_box2_cmd)
+    ld.add_action(move_with_box4_cmd)
     ld.add_action(load_carrier_cmd)
     ld.add_action(fill_item_cmd)
     ld.add_action(unloadrobot_cmd)
