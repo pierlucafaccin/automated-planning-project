@@ -32,9 +32,9 @@
 
     (loaded ?r - robot ?b - box)
 
-    ;(need-food ?p - person)
+    (need-food ?p - person)
     (need-medicine ?p - person)
-    ;(need-tool ?p - person)
+    (need-tool ?p - person)
 
 
     (capacity ?c - carrier ?cap - cap_number)
