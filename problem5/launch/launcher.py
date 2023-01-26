@@ -33,9 +33,6 @@ def generate_launch_description():
         default_value='',
         description='Namespace')
 
-    stdout_linebuf_envvar = SetEnvironmentVariable(
-        'RCUTILS_CONSOLE_STDOUT_LINE_BUFFERED', '1')
-
     plansys2_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(
             get_package_share_directory('plansys2_bringup'),
@@ -142,7 +139,6 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # Set environment variables
-    ld.add_action(stdout_linebuf_envvar)
     ld.add_action(declare_namespace_cmd)
 
     # Declare the launch options
