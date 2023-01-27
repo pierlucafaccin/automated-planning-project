@@ -9,7 +9,7 @@ This project is focused on the field of automated planning and covers various as
 ## Folders
 
 - Problem1: Contains the domain and problem files for the first assigned problem and the results.txt to see the plan generated.
-- Problem2: Contains the domain and problem files for the second assigned problem.
+- Problem2: Contains the domain and problem files for the second assigned problem in 2 versions: with and without fluents, with the respective results .txt files.
 - Problem3: Contains the domain and problem files for the third assigned problem.
 - Problem4: Contains the domain and problem files for the fourth assigned problem.
 - Problem5: Contains the domain and problem files for the fifth assigned problem.
