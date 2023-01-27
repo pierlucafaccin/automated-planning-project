@@ -234,7 +234,8 @@
                        (not (at-box ?b ?to))
                        (not (at-item ?i ?to))
                        (not (at-carrier ?c ?to))
-                       ;(not (= ?from ?to))
+                       (not (= ?from ?to))
+                       (not (= ?to depot))
                        (full ?b ?i)
                        (inbox ?i)
                        (not (empty ?b))
@@ -271,8 +272,6 @@
                        (loaded ?r ?b1)
                        (loaded ?r ?b2)
                        (not (= ?b1 ?b2))
-                       ; If it goes to depot, carrier capacity should be 0
-                       (or (not (= ?to depot)) (= (carrier-capacity ?c) 0))
     )
     :effect (and (at-robot ?r ?to)
                  (at-box ?b1 ?to)
@@ -286,7 +285,6 @@
                  (not (at-item ?i1 ?from))
                  (not (at-item ?i2 ?from))
                  (not (at-carrier ?c ?from))
-                 (increase (total-cost) 1)
     )
 )
 
@@ -317,8 +315,6 @@
                        (not (= ?b1 ?b2))
                        (not (= ?b3 ?b1))
                        (not (= ?b3 ?b2))
-                       ; If it goes to depot, carrier capacity should be 0
-                       (or (not (= ?to depot)) (= (carrier-capacity ?c) 0))
     )
     :effect (and (at-robot ?r ?to)
                  (at-box ?b1 ?to)
@@ -336,7 +332,6 @@
                  (not (at-item ?i2 ?from))
                  (not (at-item ?i3 ?from))
                  (not (at-carrier ?c ?from))
-                 (increase (total-cost) 1)
     )
 )
 
@@ -376,8 +371,6 @@
                        (not (= ?b4 ?b1))
                        (not (= ?b4 ?b2))
                        (not (= ?b4 ?b3))
-                       ; If it goes to depot, carrier capacity should be 0
-                       (or (not (= ?to depot)) (= (carrier-capacity ?c) 0))
     )
     :effect (and (at-robot ?r ?to)
                  (at-box ?b1 ?to)
@@ -399,7 +392,6 @@
                  (not (at-item ?i3 ?from))
                  (not (at-item ?i4 ?from))
                  (not (at-carrier ?c ?from))
-                 (increase (total-cost) 1)
     )
 )
 
