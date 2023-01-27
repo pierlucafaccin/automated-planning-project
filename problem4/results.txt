@@ -1,0 +1,43 @@
+New solution has been found.
+
+Found new plan:
+0.00000000: (fill-item box2 agent depot tool1) [5.00000000]
+5.01000000: (fill-item box1 agent depot medicine1) [5.00000000]
+10.02000000: (load-carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+14.03000000: (move-with-box agent depot verona box1 medicine1 elicopter) [10.00000000]
+24.04000000: (unloadrobot agent box1 verona elicopter capacity3 capacity4) [2.00000000]
+26.05000000: (empty-box-medicine agent box1 verona medicine1 alice) [3.00000000]
+29.06000000: (move agent verona depot elicopter) [10.00000000]
+39.07000000: (load-carrier agent box2 depot tool1 elicopter capacity3 capacity4) [4.00000000]
+43.08000000: (move-with-box agent depot padova box2 tool1 elicopter) [10.00000000]
+53.09000000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+55.10000000: (empty-box-tool agent box2 padova tool1 bob) [3.00000000]
+Rescheduled Plan:
+0.00100000: (fill-item box2 agent depot tool1) [5.00000000]
+5.01100000: (fill-item box1 agent depot medicine1) [5.00000000]
+10.02100000: (load-carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+14.03100000: (move-with-box agent depot verona box1 medicine1 elicopter) [10.00000000]
+24.04100000: (unloadrobot agent box1 verona elicopter capacity3 capacity4) [2.00000000]
+26.05100000: (empty-box-medicine agent box1 verona medicine1 alice) [3.00000000]
+29.06100000: (move agent verona depot elicopter) [10.00000000]
+39.07100000: (load-carrier agent box2 depot tool1 elicopter capacity3 capacity4) [4.00000000]
+43.08100000: (move-with-box agent depot padova box2 tool1 elicopter) [10.00000000]
+53.09100000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+55.10100000: (empty-box-tool agent box2 padova tool1 bob) [3.00000000]
+Solution with original makespan 58.1 found (ignoring no-moving-targets-rule).
+Plan length: 11 step(s).
+Makespan   : 58.101
+Rescheduled Makespan   : 58.101
+Search time: 0.03 seconds - Walltime: 0.03212 seconds
+Total time: 0.04 seconds - Walltime: 0.05161 seconds
+0.00100000: (fill-item box2 agent depot tool1) [5.00000000]
+5.01100000: (fill-item box1 agent depot medicine1) [5.00000000]
+10.02100000: (load-carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+14.03100000: (move-with-box agent depot verona box1 medicine1 elicopter) [10.00000000]
+24.04100000: (unloadrobot agent box1 verona elicopter capacity3 capacity4) [2.00000000]
+26.05100000: (empty-box-medicine agent box1 verona medicine1 alice) [3.00000000]
+29.06100000: (move agent verona depot elicopter) [10.00000000]
+39.07100000: (load-carrier agent box2 depot tool1 elicopter capacity3 capacity4) [4.00000000]
+43.08100000: (move-with-box agent depot padova box2 tool1 elicopter) [10.00000000]
+53.09100000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+55.10100000: (empty-box-tool agent box2 padova tool1 bob) [3.00000000]
