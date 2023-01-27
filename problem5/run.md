@@ -7,7 +7,7 @@ Install TFD:
 - git clone https://github.com/roveri-marco/tfd
 - cd tfd
 - ./build
-- sudo nano /opt/ros/humble/share/plansys2_bringup/params/plansys2_params.yaml
+- sudo nano /opt/ros/\<ros-version>/share/plansys2_bringup/params/plansys2_params.yaml
 - modify the file by putting TFD instead of POPF in plan_solver_plugins:["POPF"]
 - nano ~/.bashrc
 - add: export TFD_HOME=$HOME/tfd/downward/
@@ -23,8 +23,8 @@ Module plansys2_tfd_plan_solver:
 
 ## Execution:
 
-- cd path-to-project-root/problem5
-- source /opt/ros/<ros-version>/setup.bash
+- cd \<path-to-project-root>/problem5
+- source /opt/ros/\<ros-version>/setup.bash
 - colcon build --symlink-install
 - rosdep install --from-paths src --ignore-src -r -y
 - colcon build --symlink-install
