@@ -1,0 +1,225 @@
+root@dagu9:~/shared/Zinni/problem5# ros2 run plansys2_terminal plansys2_terminal
+[INFO] [1674832176.780661055] [terminal]: No problem file specified.
+ROS2 Planning System console. Type "quit" to finish
+> source /root/shared/Zinni/problem5/launch/commands
+> get plan
+[plansys2_node-1] Parsing...
+[plansys2_node-1] Contains quantified condition(s): False
+[plansys2_node-1] Instantiating...
+[plansys2_node-1] Trivial rules: Converted to facts.
+[plansys2_node-1] Starting instantiation [166 rules]...
+[plansys2_node-1] Finding invariants...
+[plansys2_node-1] Finding invariants... 41 initial candidates
+[plansys2_node-1] [0.190s CPU, 0.195s wall-clock]
+[plansys2_node-1] Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+[plansys2_node-1] Instantiating groups...
+[plansys2_node-1] Choosing groups...
+[plansys2_node-1] 47 uncovered facts (before using the results from the invariant synthesis)
+[plansys2_node-1] 21 uncovered facts
+[plansys2_node-1] Building translation key...
+[plansys2_node-1] Building STRIPS to SAS dictionary...
+[plansys2_node-1] Translating task...
+[plansys2_node-1] Processing axioms...
+[plansys2_node-1] Found 0 axioms that are always true and 0 that are always false
+[plansys2_node-1] constrained 5238 conditions
+[plansys2_node-1] Writing output...
+[plansys2_node-1] Done!
+[plansys2_node-1] contains_quantified_conditions: 0
+[plansys2_node-1] Building causal graph...
+[plansys2_node-1] The causal graph is not acyclic.
+[plansys2_node-1] 34 variables of 34 necessary
+[plansys2_node-1] 831 of 831 operators necessary.
+[plansys2_node-1] 0 of 0 Axiom_relational rules necessary.
+[plansys2_node-1] 0 of 0 Axiom_functional rules necessary.
+[plansys2_node-1] Building domain transition graphs...
+[plansys2_node-1] solveable in poly time 0
+[plansys2_node-1] Building successor generator...
+[plansys2_node-1] all_operator_indices.size(): 831
+[plansys2_node-1] Writing output...
+[plansys2_node-1] printing SG 
+[plansys2_node-1] 34
+[plansys2_node-1] done
+[plansys2_node-1] 
+[plansys2_node-1] 
+[plansys2_node-1] Planner Paramters:
+[plansys2_node-1] Anytime Search: Enabled
+[plansys2_node-1] Timeout if plan was found: 5 seconds
+[plansys2_node-1] Timeout while no plan was found: 10 seconds
+[plansys2_node-1] Greedy Search: Disabled
+[plansys2_node-1] Verbose: Enabled
+[plansys2_node-1] Lazy Heuristic Evaluation: Enabled
+[plansys2_node-1] Use caching in heuristic.
+[plansys2_node-1] Cyclic CG heuristic: Enabled  Preferred Operators: Enabled
+[plansys2_node-1] Makespan heuristic: Disabled  Preferred Operators: Disabled
+[plansys2_node-1] No Heuristic: Disabled
+[plansys2_node-1] Cg Heuristic Zero Cost Waiting Transitions: Enabled
+[plansys2_node-1] Cg Heuristic Fire Waiting Transitions Only If Local Problems Matches State: Disabled
+[plansys2_node-1] PrefOpsOrderedMode: Enabled with 1 goals
+[plansys2_node-1] PrefOpsCheapestMode: Enabled with 1 goals
+[plansys2_node-1] PrefOpsMostExpensiveMode: Disabled with 1000 goals
+[plansys2_node-1] PrefOpsRandMode: Disabled with 1000 goals
+[plansys2_node-1] PrefOpsConcurrentMode: Disabled
+[plansys2_node-1] Reset after solution was found: Disabled
+[plansys2_node-1] Reward only preferred operators queue: Disabled
+[plansys2_node-1] GValues by: Timestamp
+[plansys2_node-1] Queue management mode: Priority based
+[plansys2_node-1] Known by logical state only filtering: Disabled
+[plansys2_node-1] use_subgoals_to_break_makespan_ties: Disabled
+[plansys2_node-1] Reschedule plans: Enabled
+[plansys2_node-1] Epsilonize internally: Enabled
+[plansys2_node-1] Epsilonize externally: Disabled
+[plansys2_node-1] Keep original plans: Enabled
+[plansys2_node-1] Plan name: "/tmp///pddlplan"
+[plansys2_node-1] Plan monitor file: "" (no monitoring)
+[plansys2_node-1] Monitoring verify timestamps: Disabled
+[plansys2_node-1] 
+[plansys2_node-1] Contains universal conditions: 0
+[plansys2_node-1] INIT
+[plansys2_node-1] Open list sizes (priorities): 0 (0),  0 (0),  0 (0),  0 (0), 
+[plansys2_node-1] Initializing cyclic causal graph heuristic...done.
+[plansys2_node-1] Best heuristic values of queues: 222/-1/-1/-1 [expanded 1 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 156.98/-1/-1/-1 [expanded 2 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 152/-1/-1/-1 [expanded 3 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 149.98/-1/-1/-1 [expanded 4 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 147.97/-1/-1/-1 [expanded 5 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 145.97/-1/-1/-1 [expanded 6 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 86.98/-1/-1/-1 [expanded 33 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 82/-1/-1/-1 [expanded 34 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 79.98/-1/-1/-1 [expanded 35 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 77.97/-1/-1/-1 [expanded 36 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 75.97/-1/-1/-1 [expanded 37 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 50.98/-1/-1/-1 [expanded 52 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 41/-1/-1/-1 [expanded 53 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 38.98/-1/-1/-1 [expanded 54 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 36.97/-1/-1/-1 [expanded 55 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 34.97/-1/-1/-1 [expanded 56 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 14.98/-1/-1/-1 [expanded 60 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 5/-1/-1/-1 [expanded 61 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 4.98/-1/-1/-1 [expanded 62 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 3/-1/-1/-1 [expanded 63 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0.9/-1/-1/-1 [expanded 64 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/-1/-1 [expanded 65 state(s)]
+[plansys2_node-1] New solution has been found.
+[plansys2_node-1] 
+[plansys2_node-1] Found new plan:
+[plansys2_node-1] 0.00000000: (fill_item box2 agent depot tool1) [5.00000000]
+[plansys2_node-1] 5.01000000: (fill_item box1 agent depot medicine1) [5.00000000]
+[plansys2_node-1] 10.02000000: (load_carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 14.03000000: (move_with_box agent depot verona box1 medicine1 elicopter) [10.00000000]
+[plansys2_node-1] 24.04000000: (unloadrobot agent box1 verona elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 26.05000000: (empty_box_medicine agent box1 verona medicine1 alice) [3.00000000]
+[plansys2_node-1] 29.06000000: (move agent verona depot elicopter) [10.00000000]
+[plansys2_node-1] 39.07000000: (load_carrier agent box2 depot tool1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 43.08000000: (move_with_box agent depot padova box2 tool1 elicopter) [10.00000000]
+[plansys2_node-1] 53.09000000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 55.10000000: (empty_box_tool agent box2 padova tool1 bob) [3.00000000]
+[plansys2_node-1] Rescheduled Plan:
+[plansys2_node-1] 0.00100000: (fill_item box2 agent depot tool1) [5.00000000]
+[plansys2_node-1] 5.01100000: (fill_item box1 agent depot medicine1) [5.00000000]
+[plansys2_node-1] 10.02100000: (load_carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 14.03100000: (move_with_box agent depot verona box1 medicine1 elicopter) [10.00000000]
+[plansys2_node-1] 24.04100000: (unloadrobot agent box1 verona elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 26.05100000: (empty_box_medicine agent box1 verona medicine1 alice) [3.00000000]
+[plansys2_node-1] 29.06100000: (move agent verona depot elicopter) [10.00000000]
+[plansys2_node-1] 39.07100000: (load_carrier agent box2 depot tool1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 43.08100000: (move_with_box agent depot padova box2 tool1 elicopter) [10.00000000]
+[plansys2_node-1] 53.09100000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 55.10100000: (empty_box_tool agent box2 padova tool1 bob) [3.00000000]
+[plansys2_node-1] Solution with original makespan 58.1 found (ignoring no-moving-targets-rule).
+[plansys2_node-1] Plan length: 11 step(s).
+[plansys2_node-1] Makespan   : 58.101
+[plansys2_node-1] Rescheduled Makespan   : 58.101
+[plansys2_node-1] INIT
+[plansys2_node-1] Open list sizes (priorities): 35 (-21922),  112 (0),  154 (0),  124 (0), 
+[plansys2_node-1] Best heuristic values of queues: 0/-1/-1/44.98 [expanded 352 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/71.98/44.98 [expanded 824 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/69.97/44.98 [expanded 826 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/67.98/44.98 [expanded 835 state(s)]
+[plansys2_node-1] New solution has been found.
+[plansys2_node-1] 
+[plansys2_node-1] Found new plan:
+[plansys2_node-1] 0.00000000: (fill_item box2 agent depot tool1) [5.00000000]
+[plansys2_node-1] 5.01000000: (fill_item box1 agent depot medicine1) [5.00000000]
+[plansys2_node-1] 10.02000000: (load_carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 10.03000000: (load_carrier agent box2 depot tool1 elicopter capacity2 capacity3) [4.00000000]
+[plansys2_node-1] 14.04000000: (move_with_box agent depot verona box1 medicine1 elicopter) [10.00000000]
+[plansys2_node-1] 24.05000000: (unloadrobot agent box1 verona elicopter capacity2 capacity3) [2.00000000]
+[plansys2_node-1] 26.06000000: (empty_box_medicine agent box1 verona medicine1 alice) [3.00000000]
+[plansys2_node-1] 29.07000000: (move agent verona depot elicopter) [10.00000000]
+[plansys2_node-1] 39.08000000: (move_with_box agent depot padova box2 tool1 elicopter) [10.00000000]
+[plansys2_node-1] 49.09000000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 51.10000000: (empty_box_tool agent box2 padova tool1 bob) [3.00000000]
+[plansys2_node-1] Rescheduled Plan:
+[plansys2_node-1] 0.00100000: (fill_item box2 agent depot tool1) [5.00000000]
+[plansys2_node-1] 5.01100000: (fill_item box1 agent depot medicine1) [5.00000000]
+[plansys2_node-1] 10.02100000: (load_carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 10.03100000: (load_carrier agent box2 depot tool1 elicopter capacity2 capacity3) [4.00000000]
+[plansys2_node-1] 14.04100000: (move_with_box agent depot verona box1 medicine1 elicopter) [10.00000000]
+[plansys2_node-1] 24.05100000: (unloadrobot agent box1 verona elicopter capacity2 capacity3) [2.00000000]
+[plansys2_node-1] 26.06100000: (empty_box_medicine agent box1 verona medicine1 alice) [3.00000000]
+[plansys2_node-1] 29.07100000: (move agent verona depot elicopter) [10.00000000]
+[plansys2_node-1] 39.08100000: (move_with_box agent depot padova box2 tool1 elicopter) [10.00000000]
+[plansys2_node-1] 49.09100000: (unloadrobot agent box2 padova elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 51.10100000: (empty_box_tool agent box2 padova tool1 bob) [3.00000000]
+[plansys2_node-1] Solution with original makespan 54.1 found (ignoring no-moving-targets-rule).
+[plansys2_node-1] Plan length: 11 step(s).
+[plansys2_node-1] Makespan   : 54.101
+[plansys2_node-1] Rescheduled Makespan   : 54.101
+[plansys2_node-1] INIT
+[plansys2_node-1] Open list sizes (priorities): 7 (-20773),  1128 (102),  1315 (-2794),  206 (101), 
+[plansys2_node-1] Best heuristic values of queues: 0/-1/49.98/44.98 [expanded 990 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/39.98/44.98 [expanded 1853 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/37.98/44.98 [expanded 1855 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/27.98/44.98 [expanded 1870 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/17.98/44.98 [expanded 1872 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/15.98/44.98 [expanded 1874 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/15.98/43.98 [expanded 3062 state(s)]
+[plansys2_node-1] New solution has been found.
+[plansys2_node-1] 
+[plansys2_node-1] Found new plan:
+[plansys2_node-1] 0.00000000: (fill_item box1 agent depot tool1) [5.00000000]
+[plansys2_node-1] 5.01000000: (fill_item box2 agent depot medicine1) [5.00000000]
+[plansys2_node-1] 10.02000000: (load_carrier agent box2 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 10.03000000: (load_carrier agent box1 depot tool1 elicopter capacity2 capacity3) [4.00000000]
+[plansys2_node-1] 14.04000000: (move_with_box3 agent depot verona box2 box1 box2 medicine1 tool1 medicine1 elicopter) [10.00000000]
+[plansys2_node-1] 24.05000000: (unloadrobot agent box2 verona elicopter capacity2 capacity3) [2.00000000]
+[plansys2_node-1] 26.06000000: (empty_box_medicine agent box2 verona medicine1 alice) [3.00000000]
+[plansys2_node-1] 29.07000000: (move_with_box agent verona padova box1 tool1 elicopter) [10.00000000]
+[plansys2_node-1] 39.08000000: (unloadrobot agent box1 padova elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 41.09000000: (empty_box_tool agent box1 padova tool1 bob) [3.00000000]
+[plansys2_node-1] Rescheduled Plan:
+[plansys2_node-1] 0.00100000: (fill_item box1 agent depot tool1) [5.00000000]
+[plansys2_node-1] 5.01100000: (fill_item box2 agent depot medicine1) [5.00000000]
+[plansys2_node-1] 10.02100000: (load_carrier agent box2 depot medicine1 elicopter capacity3 capacity4) [4.00000000]
+[plansys2_node-1] 10.03100000: (load_carrier agent box1 depot tool1 elicopter capacity2 capacity3) [4.00000000]
+[plansys2_node-1] 14.04100000: (move_with_box3 agent depot verona box2 box1 box2 medicine1 tool1 medicine1 elicopter) [10.00000000]
+[plansys2_node-1] 24.05100000: (unloadrobot agent box2 verona elicopter capacity2 capacity3) [2.00000000]
+[plansys2_node-1] 26.06100000: (empty_box_medicine agent box2 verona medicine1 alice) [3.00000000]
+[plansys2_node-1] 29.07100000: (move_with_box agent verona padova box1 tool1 elicopter) [10.00000000]
+[plansys2_node-1] 39.08100000: (unloadrobot agent box1 padova elicopter capacity3 capacity4) [2.00000000]
+[plansys2_node-1] 41.09100000: (empty_box_tool agent box1 padova tool1 bob) [3.00000000]
+[plansys2_node-1] Solution with original makespan 44.09 found (ignoring no-moving-targets-rule).
+[plansys2_node-1] Plan length: 10 step(s).
+[plansys2_node-1] Makespan   : 44.091
+[plansys2_node-1] Rescheduled Makespan   : 44.091
+[plansys2_node-1] INIT
+[plansys2_node-1] Open list sizes (priorities): 2 (-17805),  3460 (565),  25 (-3938),  2701 (-309), 
+[plansys2_node-1] Best heuristic values of queues: 0/-1/14.98/43.98 [expanded 3289 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/14.98/40 [expanded 3369 state(s)]
+[plansys2_node-1] Best heuristic values of queues: 0/-1/14.98/35 [expanded 3388 state(s)]
+[plansys2_node-1] Completely explored state space -- best plan found!
+[plansys2_node-1] New solution has been found.
+[plansys2_node-1] Search time: 1.45 seconds - Walltime: 1.4915 seconds
+[plansys2_node-1] Total time: 1.48 seconds - Walltime: 1.52715 seconds
+plan: 
+0.001:  (fill_item box2 agent depot tool1)      [5]
+5.011:  (fill_item box1 agent depot medicine1)  [5]
+10.021: (load_carrier agent box1 depot medicine1 elicopter capacity3 capacity4) [4]
+14.031: (move_with_box agent depot verona box1 medicine1 elicopter)     [10]
+24.041: (unloadrobot agent box1 verona elicopter capacity3 capacity4)   [2]
+26.051: (empty_box_medicine agent box1 verona medicine1 alice)  [3]
+29.061: (move agent verona depot elicopter)     [10]
+39.071: (load_carrier agent box2 depot tool1 elicopter capacity3 capacity4)     [4]
+43.081: (move_with_box agent depot padova box2 tool1 elicopter) [10]
+53.091: (unloadrobot agent box2 padova elicopter capacity3 capacity4)   [2]
+55.101: (empty_box_tool agent box2 padova tool1 bob)    [3]
